@@ -20,7 +20,7 @@ Shoes.app :width => 600, :height => 400, :title => "shrrred" do
     end
   end
 
-  stack :margin => [10, 5, 5, 5] do
+  stack :margin => [10, 5, 5, 0] do
     background '#c8bad7'..'#762dc4'
     mask do
       flow do
@@ -30,7 +30,7 @@ Shoes.app :width => 600, :height => 400, :title => "shrrred" do
     end
   end
 
-  stack :margin => [10, 5, 10, 10], :height => 0.8725 do
+  stack :margin => [10, 0, 10, 10], :height => 0.87 do
     background "#eee", :curve => 12
     
 
@@ -67,9 +67,9 @@ Shoes.app :width => 600, :height => 400, :title => "shrrred" do
             Regexp.new(@regex.text, mod) =~ @string.text
             res = if $~.nil? then nil else $~.dup end
             unless res.nil?
-              formatted = "Match: #{res[0]}"
+              formatted = [strong("Match: "), code(res[0])]
               res[1..-1].each_with_index do |capture, i|
-                formatted += "\n#{i+1}: #{capture}"
+                formatted << code("\n#{i+1}: #{capture}")
              end
              res = formatted
             end
@@ -77,7 +77,7 @@ Shoes.app :width => 600, :height => 400, :title => "shrrred" do
             if res.nil?
               para "No matches", :stroke => '#efefef', :font => 'normal 12px'
             else
-              para code(res), :stroke => '#efefef', :font => 'normal 12px'
+              para res, :stroke => '#efefef', :font => 'normal 12px'
             end
           rescue => e
             @result.clear do
